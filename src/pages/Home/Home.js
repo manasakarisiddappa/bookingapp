@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./Home.css";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-
+import { useCategory } from "../../context";
 import { Navbar, HotelCard, Categories } from "../../components";
 
 export const Home = () => {
@@ -10,12 +10,13 @@ export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(16);
   const [testData, setTestData] = useState([]);
   const [hotels, setHotels] = useState([]);
+  const { hotelCategory } = useCategory();
 
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get(
-          "https://airbnbtravelapp.cyclic.app/api/hotels"
+          `https://airbnbtravelapp.cyclic.app/api/hotels?category=${hotelCategory}`
         );
         setTestData(data);
         setHotels(data ? data.slice(0, 16) : []);
@@ -23,16 +24,13 @@ export const Home = () => {
         console.log(err);
       }
     })();
-  }, []);
+  }, [hotelCategory]);
 
   const fetchMoreData = () => {
     if (hotels.length >= testData.length) {
       setHasMore(false);
-      console.log("lengths", hotels.length, testData.length);
-
       return;
     }
-    console.log("lengths", hotels.length, testData.length);
     setTimeout(() => {
       if (hotels && hotels.length > 0) {
         setHotels(
