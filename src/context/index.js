@@ -1,2 +1,2 @@
 export { useCategory, CategoryProvider } from "./category.context";
-export { useDate, DateProvider } from "./data.context";
+export { useDate, DateProvider } from "./date.context";

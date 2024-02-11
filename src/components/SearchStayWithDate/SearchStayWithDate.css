@@ -3,14 +3,16 @@
   height: 100%;
   background-color: var(--overlay);
   position: fixed;
-  z-index: 1;
+  z-index: 5;
   top: 0;
   left: 0;
 }
 
 .destination-options {
   background-color: var(--background-color);
-  margin: 3rem 5rem;
+  top: 3rem;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .search-dest {
@@ -30,6 +32,7 @@
   border: none;
   background-color: var(--primary-color);
   height: 100%;
+  color: #fafafa;
 }
 
 .search {
@@ -41,4 +44,21 @@
   color: var(--text-color-primary);
   padding: 8px 0 0 8px;
   font-size: 0.875rem;
+}
+
+.search-result-container {
+  background-color: var(--background-color);
+  color: var(--text-color-primary);
+  width: 25rem;
+  height: 50vh;
+  overflow-y: auto;
+  border-radius: 4px;
+  top: 8rem;
+  left: 22%;
+}
+
+.p {
+  padding: 8px;
+  color: var(--text-color-primary);
+  opacity: 0.7;
 }

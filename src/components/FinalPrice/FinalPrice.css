@@ -37,3 +37,7 @@
 .final-price:last-child {
   border-top: 1px solid var(--container-border-color);
 }
+
+.guest-count-input:focus {
+  outline: none;
+}
