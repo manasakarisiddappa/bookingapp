@@ -2,6 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { Home, SingleHotel } from "./pages";
 import { SearchResults } from "./pages/SearchResults/SearchResults";
+import { Filter } from "./components";
 
 function App() {
   return (
