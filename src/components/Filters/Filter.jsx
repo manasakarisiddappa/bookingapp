@@ -6,22 +6,19 @@ import {
   Ratings,
   FreeCancel,
 } from "./index";
+import { SHOW_FILTER_MODAL, CLEAR_ALL } from "../../Slices/filter-slice";
 
-import { useFilter } from "../../context";
+import { useDispatch } from "react-redux";
 
 export const Filter = () => {
-  const { filterDispatch } = useFilter();
+  const dispatch = useDispatch();
 
   const handleFilterModalCloseClick = () => {
-    filterDispatch({
-      type: "SHOW_FILTER_MODAL",
-    });
+    dispatch(SHOW_FILTER_MODAL());
   };
 
   const handleClearFilterClick = () => {
-    filterDispatch({
-      type: "CLEAR_ALL",
-    });
+    dispatch(CLEAR_ALL());
   };
 
   return (

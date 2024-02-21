@@ -1,14 +1,22 @@
 import React from "react";
 import "./Navbar.css";
-import { useDate } from "../../context";
+import { useAuth } from "../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { TOGGLE_SEARCH_MODAL } from "../../Slices/date-slice";
 
 export const Navbar = () => {
-  const { destination, dateDispatch, checkInDate, checkOutDate, guests } =
-    useDate();
+  const { destination, checkInDate, checkOutDate, guests, isSearchModalOpen } =
+    useSelector((state) => state.date);
+  const { authDispatch } = useAuth();
+  const dispatch = useDispatch();
 
   const handleSearchClick = () => {
-    dateDispatch({
-      type: "OPEN_SEARCH_MODAL",
+    dispatch(TOGGLE_SEARCH_MODAL());
+  };
+
+  const handleAuthClick = () => {
+    authDispatch({
+      type: "SHOW_AUTH_MODAL",
     });
   };
 
@@ -43,7 +51,7 @@ export const Navbar = () => {
         </span>
         <span className="search material-icons-outlined">search</span>
       </div>
-      <nav className="d-flex align-center gap-large">
+      <nav className="d-flex align-center gap-large" onClick={handleAuthClick}>
         <div className="nav d-flex align-center cursor-pointer">
           <span className="material-icons-outlined profile-option menu">
             menu

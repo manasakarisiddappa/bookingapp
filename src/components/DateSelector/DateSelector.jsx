@@ -1,22 +1,20 @@
 import DatePicker from "react-datepicker";
 import "./DateSelector.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { useDate } from "../../context";
+import { DATE_FOCUS, CHECK_IN, CHECK_OUT } from "../../Slices/date-slice";
+import { useSelector, useDispatch } from "react-redux";
 
 export const DateSelector = ({ checkInType }) => {
-  const { checkInDate, checkOutDate, dateDispatch } = useDate();
+  const { checkInDate, checkOutDate } = useSelector((state) => state.date);
+  const dispatch = useDispatch();
 
   const handleDateChange = (date) => {
-    dateDispatch({
-      type: checkInType === "in" ? "CHECK_IN" : "CHECK_OUT",
-      payload: date,
-    });
+    const type = checkInType === "in" ? CHECK_IN : CHECK_OUT;
+    dispatch(type(date));
   };
 
   const handleDateFocus = () => {
-    dateDispatch({
-      type: "DATE_FOCUS",
-    });
+    dispatch(DATE_FOCUS());
   };
 
   return (

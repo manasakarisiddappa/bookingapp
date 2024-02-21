@@ -1,5 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { useFilter } from "../../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { PROPERTY_TYPE } from "../../../Slices/filter-slice";
 
 const propertyTypes = [
   { id: uuid(), type: "House" },
@@ -9,13 +11,11 @@ const propertyTypes = [
 ];
 
 export const PropertyType = () => {
-  const { propertyType, filterDispatch } = useFilter();
+  const { propertyType } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
 
   const handlePropertyClick = (type) => {
-    filterDispatch({
-      type: "PROPERTY_TYPE",
-      payload: type,
-    });
+    dispatch(PROPERTY_TYPE(type));
   };
 
   return (

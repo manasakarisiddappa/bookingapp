@@ -1,27 +1,23 @@
-import { useFilter } from "../../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { BEDROOMS, BATHROOMS, BEDS } from "../../../Slices/filter-slice";
 const numbersOfAmenities = ["Any", "1", "2", "3", "4", "5+"];
 
 export const RoomsAndBeds = () => {
-  const { filterDispatch, noOfBathrooms, noOfBedrooms, noOfBeds } = useFilter();
+  const { noOfBathrooms, noOfBedrooms, noOfBeds } = useSelector(
+    (state) => state.filter
+  );
+  const dispatch = useDispatch();
+
   const handleBedroomsClick = (number) => {
-    filterDispatch({
-      type: "BEDROOMS",
-      payload: number,
-    });
+    dispatch(BEDROOMS(number));
   };
 
   const handleBathroomsClick = (number) => {
-    filterDispatch({
-      type: "BATHROOMS",
-      payload: number,
-    });
+    dispatch(BATHROOMS(number));
   };
 
   const handleBedsClick = (number) => {
-    filterDispatch({
-      type: "BEDS",
-      payload: number,
-    });
+    dispatch(BEDS(number));
   };
 
   console.log({ noOfBathrooms, noOfBedrooms, noOfBeds });

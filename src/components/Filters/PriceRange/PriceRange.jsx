@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import { useFilter } from "../../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { MAXIMUM_PRICE, MINIMUM_PRICE } from "../../../Slices/filter-slice";
 
 const minDifference = 500;
 
@@ -9,7 +10,8 @@ function valuetext(value) {
 }
 
 export const PriceRange = () => {
-  const { priceRange, filterDispatch } = useFilter();
+  const { priceRange } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
 
   console.log({ priceRange });
 
@@ -18,23 +20,21 @@ export const PriceRange = () => {
       return;
     }
     if (activeThumb === 0) {
-      filterDispatch({
-        type: "MINIMUM_PRICE",
-        payload: {
+      dispatch(
+        MINIMUM_PRICE({
           newValue,
           priceRange,
           minDifference,
-        },
-      });
+        })
+      );
     } else {
-      filterDispatch({
-        type: "MAXIMUM_PRICE",
-        payload: {
+      dispatch(
+        MAXIMUM_PRICE({
           newValue,
           priceRange,
           minDifference,
-        },
-      });
+        })
+      );
     }
   };
 

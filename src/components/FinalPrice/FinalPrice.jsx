@@ -1,16 +1,15 @@
-import { useDate } from "../../context";
 import "./FinalPrice.css";
 import { DateSelector } from "../DateSelector/DateSelector";
+import { useSelector, useDispatch } from "react-redux";
+import { GUESTS } from "../../Slices/date-slice";
 
 export const FinalPrice = ({ singleHotel }) => {
   const { price, rating } = singleHotel;
-  const { guests, dateDispatch } = useDate();
+  const { guests } = useSelector((state) => state.date);
+  const dispatch = useDispatch();
 
   const handleGuestChange = (event) => {
-    dateDispatch({
-      type: "GUESTS",
-      payload: event.target.value,
-    });
+    dispatch(GUESTS(event.target.value));
   };
 
   return (

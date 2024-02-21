@@ -1,14 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "./Home.css";
+import { BASEURL } from "../../url";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useCategory, useDate, useFilter } from "../../context";
+import { useAuth } from "../../context";
 import {
   Navbar,
   HotelCard,
   Categories,
   SearchStayWithDate,
   Filter,
+  AuthModal,
 } from "../../components";
 
 import {
@@ -24,8 +27,8 @@ export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(16);
   const [testData, setTestData] = useState([]);
   const [hotels, setHotels] = useState([]);
-  const { hotelCategory } = useCategory();
-  const { isSearchModalOpen } = useDate();
+  const { hotelCategory } = useSelector((state) => state.category);
+  const { isSearchModalOpen } = useSelector((state) => state.date);
   const {
     isFilterModalOpen,
     priceRange,
@@ -35,13 +38,15 @@ export const Home = () => {
     propertyType,
     traveloRating,
     isCancelable,
-  } = useFilter();
+  } = useSelector((state) => state.filter);
+
+  const { isAuthModalOpen } = useAuth();
 
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://airbnbtravelapp.cyclic.app/api/hotels?category=${hotelCategory}`
+          `${BASEURL}/api/hotels?category=${hotelCategory}`
         );
         setTestData(data);
         setHotels(data ? data.slice(0, 16) : []);
@@ -115,6 +120,7 @@ export const Home = () => {
       )}
       {isSearchModalOpen && <SearchStayWithDate />}
       {isFilterModalOpen && <Filter />}
+      {isAuthModalOpen && <AuthModal />}
     </div>
   );
 };

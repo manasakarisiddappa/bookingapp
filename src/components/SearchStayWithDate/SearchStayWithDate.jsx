@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DateSelector } from "../DateSelector/DateSelector";
 import "./SearchStayWithDate.css";
-import { useDate, useCategory } from "../../context";
+import {
+  DESTINATION,
+  TOGGLE_SEARCH_MODAL,
+  GUESTS,
+  SHOW_SEARCH_RESULT,
+} from "../../Slices/date-slice";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { BASEURL } from "../../url";
 
 export const SearchStayWithDate = () => {
-  const { destination, guests, isSearchResultOpen, dateDispatch } = useDate();
-  const { hotelCategory } = useCategory();
+  const { destination, guests, isSearchResultOpen } = useSelector(
+    (state) => state.date
+  );
+  const dispatch = useDispatch();
+
+  const { hotelCategory } = useSelector((state) => state.category);
   const [hotels, setHotels] = useState([]);
 
   const navigate = useNavigate();
@@ -16,7 +27,7 @@ export const SearchStayWithDate = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://airbnbtravelapp.cyclic.app/api/hotels?category=${hotelCategory}`
+          `${BASEURL}/api/hotels?category=${hotelCategory}`
         );
         setHotels(data);
       } catch (err) {
@@ -26,30 +37,19 @@ export const SearchStayWithDate = () => {
   }, [hotelCategory]);
 
   const handleDestinationChange = (event) => {
-    dateDispatch({
-      type: "DESTINATION",
-      payload: event.target.value,
-    });
+    dispatch(DESTINATION(event.target.value));
   };
 
   const handleGuestChange = (event) => {
-    dateDispatch({
-      type: "GUESTS",
-      payload: event.target.value,
-    });
+    dispatch(GUESTS(event.target.value));
   };
 
   const handleSearchResultClick = (address) => {
-    dateDispatch({
-      type: "DESTINATION",
-      payload: address,
-    });
+    dispatch(DESTINATION(address));
   };
 
   const handleSearchButtonClick = () => {
-    dateDispatch({
-      type: "CLOSE_SEARCH_MODAL",
-    });
+    dispatch(TOGGLE_SEARCH_MODAL());
     navigate(`/hotels/${destination}`);
   };
 
@@ -62,9 +62,7 @@ export const SearchStayWithDate = () => {
   );
 
   const handleDestinationFocus = () => {
-    dateDispatch({
-      type: "SHOW_SEARCH_RESULT",
-    });
+    dispatch(SHOW_SEARCH_RESULT());
   };
 
   return (

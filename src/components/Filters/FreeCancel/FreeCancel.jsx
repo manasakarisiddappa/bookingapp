@@ -1,16 +1,15 @@
 import "./FreeCancel.css";
-import { useFilter } from "../../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { CANCELABLE } from "../../../Slices/filter-slice";
 
 export const FreeCancel = () => {
-  const { filterDispatch, isCancelable } = useFilter();
-  console.log(isCancelable);
+  const { isCancelable } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
 
   const handleCancelChange = (event) => {
-    filterDispatch({
-      type: "CANCELABLE",
-      payload: event.target.checked,
-    });
+    dispatch(CANCELABLE(event.target.checked));
   };
+
   return (
     <div className="filter-container">
       <div className="d-flex align-center gap-larger">

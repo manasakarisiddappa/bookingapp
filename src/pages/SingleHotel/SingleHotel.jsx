@@ -8,6 +8,7 @@ import {
   Navbar,
 } from "../../components";
 import "./SingleHotel.css";
+import { BASEURL } from "../../url";
 
 export const SingleHotel = () => {
   const { id } = useParams();
@@ -16,9 +17,7 @@ export const SingleHotel = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(
-          `https://airbnbtravelapp.cyclic.app/api/hotels/${id}`
-        );
+        const { data } = await axios.get(`${BASEURL}/api/hotels/${id}`);
         console.log(data);
         setSingleHotel(data);
       } catch (err) {

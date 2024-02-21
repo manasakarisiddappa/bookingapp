@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useCategory, useFilter } from "../../context";
 import "./Categories.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setHotelCategory } from "../../Slices/category-slice";
+import { BASEURL } from "../../url";
+import { SHOW_FILTER_MODAL } from "../../Slices/filter-slice";
 
 export const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [numberOfCategoryToShow, setNumberOfCategoryToShow] = useState(0);
-  const { hotelCategory, setHotelCategory } = useCategory();
-  const { filterDispatch } = useFilter();
+  const hotelCategory = useSelector((state) => state.category.hotelCategory);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(
-          "https://airbnbtravelapp.cyclic.app/api/category"
-        );
+        const { data } = await axios.get(BASEURL + "/api/category");
         setCategories(data);
         const categoriesToShow = data.slice(
           numberOfCategoryToShow + 10 > data.length
@@ -40,13 +42,12 @@ export const Categories = () => {
   };
 
   const handleCategoryClick = (category) => {
-    setHotelCategory(category);
+    dispatch(setHotelCategory(category));
   };
 
   const handleFilterClick = () => {
-    filterDispatch({
-      type: "SHOW_FILTER_MODAL",
-    });
+    console.log("filter clicked");
+    dispatch(SHOW_FILTER_MODAL());
   };
 
   console.log(hotelCategory);

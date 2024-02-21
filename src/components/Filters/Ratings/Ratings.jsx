@@ -1,14 +1,13 @@
-import { useFilter } from "../../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { RATING } from "../../../Slices/filter-slice";
 const ratings = ["1", "2", "3", "4", "5"];
 
 export const Ratings = () => {
-  const { traveloRating, filterDispatch } = useFilter();
+  const { traveloRating } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
 
   const handleRatingsClick = (rating) => {
-    filterDispatch({
-      type: "RATING",
-      payload: rating,
-    });
+    dispatch(RATING(rating));
   };
 
   return (

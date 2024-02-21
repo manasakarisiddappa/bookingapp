@@ -1,18 +1,19 @@
 import { Fragment, useEffect, useState } from "react";
 import { HotelCard, Navbar } from "../../components";
-import { useCategory, useDate } from "../../context";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { BASEURL } from "../../url";
 
 export const SearchResults = () => {
-  const { destination } = useDate();
+  const { destination } = useSelector((state) => state.date);
   const [hotels, SetHotels] = useState([]);
-  const { hotelCategory } = useCategory();
+  const { hotelCategory } = useSelector((state) => state.category);
 
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://airbnbtravelapp.cyclic.app/api/hotels?category=${hotelCategory}`
+          `${BASEURL}/api/hotels?category=${hotelCategory}`
         );
         SetHotels(data);
       } catch (err) {
