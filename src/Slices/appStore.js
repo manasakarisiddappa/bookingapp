@@ -3,6 +3,7 @@ import dateReducer from "./date-slice";
 import categoryReducer from "./category-slice";
 import filterReducer from "./filter-slice";
 import authReducer from "./auth-slice";
+import whishlistReducer from "./wishlist-slice";
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) =>
@@ -14,6 +15,7 @@ const store = configureStore({
     date: dateReducer,
     filter: filterReducer,
     auth: authReducer,
+    wishlist: whishlistReducer,
   },
 });
 

@@ -4,7 +4,6 @@ import "./Home.css";
 import { BASEURL } from "../../url";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useAuth } from "../../context";
 import {
   Navbar,
   HotelCard,
@@ -29,6 +28,7 @@ export const Home = () => {
   const [hotels, setHotels] = useState([]);
   const { hotelCategory } = useSelector((state) => state.category);
   const { isSearchModalOpen } = useSelector((state) => state.date);
+  const { isAuthModalOpen } = useSelector((state) => state.auth);
   const {
     isFilterModalOpen,
     priceRange,
@@ -39,8 +39,6 @@ export const Home = () => {
     traveloRating,
     isCancelable,
   } = useSelector((state) => state.filter);
-
-  const { isAuthModalOpen } = useAuth();
 
   useEffect(() => {
     (async () => {

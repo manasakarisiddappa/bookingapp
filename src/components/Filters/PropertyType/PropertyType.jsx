@@ -1,5 +1,4 @@
 import { v4 as uuid } from "uuid";
-import { useFilter } from "../../../context";
 import { useDispatch, useSelector } from "react-redux";
 import { PROPERTY_TYPE } from "../../../Slices/filter-slice";
 

@@ -3,12 +3,21 @@ import { validateNumber, validatePassword } from "../../utils";
 
 import { loginHandler } from "../../services";
 import { useDispatch, useSelector } from "react-redux";
-import { CLEAR_USER_DATA, NUMBER, PASSWORD } from "../../Slices/auth-slice";
+import {
+  CLEAR_USER_DATA,
+  NUMBER,
+  PASSWORD,
+  SET_ACCESS_TOKEN,
+  SET_USER_NAME,
+  SHOW_AUTH_MODAL,
+} from "../../Slices/auth-slice";
 
 let isNumberValid, isPasswordValid;
 
 export const AuthLogin = () => {
-  const { number, password } = useSelector((state) => state.auth);
+  const { number, password, isAuthModalOpen } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
 
   const handleMobileChange = (event) => {
@@ -28,19 +37,25 @@ export const AuthLogin = () => {
       console.log("Invalid password");
     }
   };
+  console.log({ isNumberValid, isPasswordValid });
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     if (isPasswordValid && isNumberValid) {
-      const { accessToken, username } = loginHandler(number, password);
-      // dispatch(SET_ACCESS_TOKEN{
-      //   type: "SET_ACCESS_TOKEN",
-      // });
-      // dispatch(SET_USER_NAME(){
-      //   type: "SET_USER_NAME",
-      // });
+      const { accessToken, username } = await loginHandler(number, password);
+      dispatch(SET_ACCESS_TOKEN(accessToken));
+      dispatch(SET_USER_NAME(username));
+
+      dispatch(CLEAR_USER_DATA());
+      dispatch(SHOW_AUTH_MODAL());
+
+      console.log(
+        "inside auth login modal",
+        accessToken,
+        username,
+        isAuthModalOpen
+      );
     }
-    dispatch(CLEAR_USER_DATA());
   };
 
   return (

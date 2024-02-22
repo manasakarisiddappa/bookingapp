@@ -39,9 +39,14 @@ const authSlice = createSlice({
     CONFIRM_PASSWORD: (state, { payload }) => {
       state.confirmPassword = payload;
     },
+    SET_ACCESS_TOKEN: (state, { payload }) => {
+      state.accessToken = payload;
+    },
+    SET_USER_NAME: (state, { payload }) => {
+      state.name = payload;
+    },
 
     CLEAR_USER_DATA: (state) => {
-      state.isAuthModalOpen = false;
       state.username = "";
       state.number = "";
       state.email = "";
@@ -61,5 +66,7 @@ export const {
   PASSWORD,
   CONFIRM_PASSWORD,
   CLEAR_USER_DATA,
+  SET_ACCESS_TOKEN,
+  SET_USER_NAME,
 } = authSlice.actions;
 export default authSlice.reducer;

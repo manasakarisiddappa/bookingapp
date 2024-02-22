@@ -1,13 +1,36 @@
+import { useDispatch, useSelector } from "react-redux";
 import "./HotelCard.css";
 import { useNavigate } from "react-router-dom";
+import {
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST,
+} from "../../Slices/wishlist-slice";
+import { findHotelInWishlist } from "../../utils";
+import { SHOW_AUTH_MODAL } from "../../Slices/auth-slice";
 
 export const HotelCard = ({ hotel }) => {
   const { _id, name, image, address, state, rating, price } = hotel;
+  const dispatch = useDispatch();
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const { accessToken } = useSelector((state) => state.auth);
+  const IsHotelInWishlist = findHotelInWishlist(wishlist, _id);
+
+  console.log({ accessToken });
+  console.log({ wishlist });
 
   const navigate = useNavigate();
 
   const handleHotelCardClick = () => {
     navigate(`/hotels/${name}/${address}/${state}/${_id}/reserve`);
+  };
+
+  const handleWishlistClick = () => {
+    if (accessToken) {
+      if (!IsHotelInWishlist) dispatch(ADD_TO_WISHLIST(hotel));
+      else dispatch(REMOVE_FROM_WISHLIST(_id));
+    } else {
+      dispatch(SHOW_AUTH_MODAL());
+    }
   };
 
   return (
@@ -31,8 +54,17 @@ export const HotelCard = ({ hotel }) => {
           </p>
         </div>
       </div>
-      <button className="button btn-wishlist absolute">
-        <span class="material-icons favourite cursor">favorite</span>
+      <button
+        className="button btn-wishlist absolute"
+        onClick={handleWishlistClick}
+      >
+        <span
+          class={`material-icons favourite cursor ${
+            IsHotelInWishlist && "favselected"
+          }`}
+        >
+          favorite
+        </span>
       </button>
     </div>
   );

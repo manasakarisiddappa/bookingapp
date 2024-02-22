@@ -1,7 +1,6 @@
 import { AuthLogin } from "../Auth/AuthLogin";
 import { AuthSignup } from "../Auth/AuthSignup";
 import "./AuthModal.css";
-import { useAuth } from "../../context";
 import { useDispatch, useSelector } from "react-redux";
 import {
   SET_TO_LOGIN,
@@ -10,7 +9,7 @@ import {
 } from "../../Slices/auth-slice";
 
 export const AuthModal = () => {
-  const { authDispatch, selectedTab } = useSelector((state) => state.auth);
+  const { selectedTab } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleLoginClick = () => {

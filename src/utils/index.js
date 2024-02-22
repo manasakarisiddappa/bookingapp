@@ -7,3 +7,4 @@ export { validateName } from "./name-regex.js";
 export { validateEmail } from "./email-regex.js";
 export { validatePassword } from "./password-regex.js";
 export { validateNumber } from "./number-regex.js";
+export { findHotelInWishlist } from "./find-hotel-in-wishlist.js";

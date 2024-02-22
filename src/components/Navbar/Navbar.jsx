@@ -1,13 +1,12 @@
 import React from "react";
 import "./Navbar.css";
-import { useAuth } from "../../context";
 import { useDispatch, useSelector } from "react-redux";
 import { TOGGLE_SEARCH_MODAL } from "../../Slices/date-slice";
+import { SHOW_AUTH_MODAL } from "../../Slices/auth-slice";
 
 export const Navbar = () => {
   const { destination, checkInDate, checkOutDate, guests, isSearchModalOpen } =
     useSelector((state) => state.date);
-  const { authDispatch } = useAuth();
   const dispatch = useDispatch();
 
   const handleSearchClick = () => {
@@ -15,9 +14,7 @@ export const Navbar = () => {
   };
 
   const handleAuthClick = () => {
-    authDispatch({
-      type: "SHOW_AUTH_MODAL",
-    });
+    dispatch(SHOW_AUTH_MODAL());
   };
 
   return (
