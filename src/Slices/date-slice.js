@@ -33,6 +33,11 @@ const dateSlice = createSlice({
     SHOW_SEARCH_RESULT: (state) => {
       state.isSearchResultOpen = true;
     },
+    CLEAR_INPUTS: (state) => {
+      state.checkInDate = null;
+      state.checkOutDate = null;
+      state.guests = 0;
+    },
   },
 });
 
@@ -44,5 +49,6 @@ export const {
   DATE_FOCUS,
   SHOW_SEARCH_RESULT,
   TOGGLE_SEARCH_MODAL,
+  CLEAR_INPUTS,
 } = dateSlice.actions;
 export default dateSlice.reducer;

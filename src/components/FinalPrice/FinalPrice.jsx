@@ -2,14 +2,22 @@ import "./FinalPrice.css";
 import { DateSelector } from "../DateSelector/DateSelector";
 import { useSelector, useDispatch } from "react-redux";
 import { GUESTS } from "../../Slices/date-slice";
+import { useNavigate } from "react-router-dom";
 
 export const FinalPrice = ({ singleHotel }) => {
-  const { price, rating } = singleHotel;
-  const { guests } = useSelector((state) => state.date);
+  const { _id, price, rating } = singleHotel;
+  const { guests, checkInDate, checkOutDate } = useSelector(
+    (state) => state.date
+  );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleGuestChange = (event) => {
     dispatch(GUESTS(event.target.value));
+  };
+
+  const handleReserveClick = () => {
+    navigate(`/confirm-booking/stay/${_id}`);
   };
 
   return (
@@ -50,7 +58,11 @@ export const FinalPrice = ({ singleHotel }) => {
         </div>
       </div>
       <div>
-        <button className="button btn-reserve btn-primary cursor">
+        <button
+          className="button btn-reserve btn-primary cursor"
+          onClick={handleReserveClick}
+          disabled={checkInDate && checkOutDate && guests > 0 ? false : true}
+        >
           Reserve
         </button>
       </div>

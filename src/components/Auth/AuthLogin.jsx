@@ -45,17 +45,20 @@ export const AuthLogin = () => {
       const { accessToken, username } = await loginHandler(number, password);
       dispatch(SET_ACCESS_TOKEN(accessToken));
       dispatch(SET_USER_NAME(username));
-
-      dispatch(CLEAR_USER_DATA());
-      dispatch(SHOW_AUTH_MODAL());
-
-      console.log(
-        "inside auth login modal",
-        accessToken,
-        username,
-        isAuthModalOpen
-      );
     }
+    dispatch(CLEAR_USER_DATA());
+    dispatch(SHOW_AUTH_MODAL());
+  };
+
+  const handleTestCredentialsClick = async () => {
+    const { accessToken, username } = await loginHandler(
+      9898989898,
+      "Abcd$1234"
+    );
+    dispatch(SET_ACCESS_TOKEN(accessToken));
+    dispatch(SET_USER_NAME(username));
+    dispatch(CLEAR_USER_DATA());
+    dispatch(SHOW_AUTH_MODAL());
   };
 
   return (
@@ -93,7 +96,10 @@ export const AuthLogin = () => {
         </div>
       </form>
       <div className="cta">
-        <button className="button btn-outline-primary cursor-pointer">
+        <button
+          className="button btn-outline-primary cursor-pointer"
+          onClick={handleTestCredentialsClick}
+        >
           Login with Test Credentials
         </button>
       </div>

@@ -4,6 +4,7 @@ import categoryReducer from "./category-slice";
 import filterReducer from "./filter-slice";
 import authReducer from "./auth-slice";
 import whishlistReducer from "./wishlist-slice";
+import HotelReducer from "./hotel-slice";
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) =>
@@ -16,6 +17,7 @@ const store = configureStore({
     filter: filterReducer,
     auth: authReducer,
     wishlist: whishlistReducer,
+    hotel: HotelReducer,
   },
 });
 
