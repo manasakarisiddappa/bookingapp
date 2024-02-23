@@ -1,0 +1,10 @@
+export { getHotelsByPrice } from "./price-range.js";
+export { getHotelsByRoomsAndBeds } from "./rooms-beds.js";
+export { getHotelsByPropertyType } from "./property.js";
+export { getHotelsByRating } from "./rating.js";
+export { getHotelsByCancelation } from "./hotel-cancel.js";
+export { validateName } from "./name-regex.js";
+export { validateEmail } from "./email-regex.js";
+export { validatePassword } from "./password-regex.js";
+export { validateNumber } from "./number-regex.js";
+export { findHotelInWishlist } from "./find-hotel-in-wishlist.js";
