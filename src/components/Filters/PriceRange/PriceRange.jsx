@@ -13,8 +13,6 @@ export const PriceRange = () => {
   const { priceRange } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
-  console.log({ priceRange });
-
   const handlePriceChange = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return;

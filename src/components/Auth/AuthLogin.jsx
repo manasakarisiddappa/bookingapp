@@ -39,7 +39,6 @@ export const AuthLogin = () => {
       console.log("Invalid password");
     }
   };
-  console.log({ isNumberValid, isPasswordValid });
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();

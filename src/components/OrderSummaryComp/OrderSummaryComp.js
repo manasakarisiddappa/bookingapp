@@ -8,7 +8,6 @@ export const OrderSummaryComp = () => {
   const navigate = useNavigate();
   const { hotel } = useSelector((state) => state.hotel);
   const dispatch = useDispatch();
-  console.log({ hotel });
   const {
     orderId,
     name,

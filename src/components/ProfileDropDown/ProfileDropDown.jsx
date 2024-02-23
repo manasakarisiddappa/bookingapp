@@ -40,8 +40,6 @@ export const ProfileDropDown = () => {
     });
   };
 
-  console.log("from profile");
-
   return (
     <div className="drop-down-container shadow d-flex direction-column absolute">
       <span

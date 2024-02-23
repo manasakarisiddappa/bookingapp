@@ -46,7 +46,6 @@ export const Home = () => {
     isCancelable,
   } = useSelector((state) => state.filter);
 
-  console.log(isDropDownModalOpen);
   useEffect(() => {
     (async () => {
       try {

@@ -10,11 +10,9 @@ import { setHotel } from "../../Slices/hotel-slice";
 export const Payment = () => {
   const params = useParams();
   const { id } = params;
-  console.log(id, "id");
 
   const navigate = useNavigate();
   const { hotel } = useSelector((state) => state.hotel);
-  console.log("hotel in payment", hotel);
 
   const { guests, checkInDate, checkOutDate } = useSelector(
     (state) => state.date
@@ -37,7 +35,6 @@ export const Payment = () => {
       } catch (err) {
         console.log(err);
       }
-      console.log(`https://localhost:3500/api/hotels/${id}`);
     })();
   }, [id]);
 
@@ -102,7 +99,6 @@ export const Payment = () => {
     paymentObject.open();
   };
 
-  console.log(price);
   return (
     <Fragment>
       <header className="heading">

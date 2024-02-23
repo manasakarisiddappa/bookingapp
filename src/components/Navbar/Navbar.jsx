@@ -21,13 +21,10 @@ export const Navbar = ({ route }) => {
   const handleAuthClick = () => {
     if (accessToken) {
       dispatch(SHOW_DROP_DOWN_OPTIONS());
-      console.log("inside nav bar");
     } else {
       dispatch(SHOW_AUTH_MODAL());
     }
   };
-
-  console.log(name, "user");
 
   return (
     <header className="heading d-flex align-center">

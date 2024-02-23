@@ -20,8 +20,6 @@ export const RoomsAndBeds = () => {
     dispatch(BEDS(number));
   };
 
-  console.log({ noOfBathrooms, noOfBedrooms, noOfBeds });
-
   return (
     <div className="filter-container">
       <span className="filter-label">Rooms and Beds</span>

@@ -16,7 +16,6 @@ const filterSlice = createSlice({
   reducers: {
     SHOW_FILTER_MODAL: (state) => {
       state.isFilterModalOpen = !state.isFilterModalOpen;
-      console.log("inside filter modal", state.isFilterModalOpen);
     },
 
     MINIMUM_PRICE: (state, { payload }) => {
