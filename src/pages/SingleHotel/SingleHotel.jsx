@@ -27,7 +27,6 @@ export const SingleHotel = () => {
     (async () => {
       try {
         const { data } = await axios.get(`${BASEURL}/api/hotels/${id}`);
-        console.log(data);
         setSingleHotel(data);
       } catch (err) {
         console.log(err);

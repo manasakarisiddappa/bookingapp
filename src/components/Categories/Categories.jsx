@@ -46,11 +46,9 @@ export const Categories = () => {
   };
 
   const handleFilterClick = () => {
-    console.log("filter clicked");
     dispatch(SHOW_FILTER_MODAL());
   };
 
-  console.log(hotelCategory);
   return (
     <section className="d-flex align-center gap-large cursor-pointer categories">
       {numberOfCategoryToShow >= 10 && (

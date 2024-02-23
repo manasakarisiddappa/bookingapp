@@ -9,7 +9,6 @@ export const LoginHandler = async (number, password, setAlert) => {
       number: number,
       password: password,
     });
-    console.log({ accessToken, username });
     localStorage.setItem("token", accessToken);
     localStorage.setItem("username", username);
     setAlert({

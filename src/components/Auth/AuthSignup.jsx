@@ -30,15 +30,6 @@ export const AuthSignup = () => {
   const dispatch = useDispatch();
   const { setAlert } = useAlert();
 
-  console.log({ username, email, password, number, confirmPassword });
-  console.log({
-    isNumberValid,
-    isNameValid,
-    isEmailValid,
-    isPasswordValid,
-    isConfirmPasswordValid,
-  });
-
   const handleNumberChange = (event) => {
     isNumberValid = validateNumber(event.target.value);
     if (isNumberValid) {
