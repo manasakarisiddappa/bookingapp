@@ -14,8 +14,12 @@ const wishlistSlice = createSlice({
     REMOVE_FROM_WISHLIST: (state, { payload }) => {
       state.wishlist = state.wishlist.filter((hotel) => hotel._id !== payload);
     },
+    CLEAR_WISHLIST: (state) => {
+      state.wishlist = [];
+    },
   },
 });
 
-export const { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } = wishlistSlice.actions;
+export const { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST, CLEAR_WISHLIST } =
+  wishlistSlice.actions;
 export default wishlistSlice.reducer;

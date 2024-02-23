@@ -11,6 +11,8 @@ import {
   SearchStayWithDate,
   Filter,
   AuthModal,
+  Alert,
+  ProfileDropDown,
 } from "../../components";
 
 import {
@@ -20,6 +22,7 @@ import {
   getHotelsByRating,
   getHotelsByCancelation,
 } from "../../utils";
+import { useAlert } from "../../context/alert-context";
 
 export const Home = () => {
   const [hasMore, setHasMore] = useState(true);
@@ -28,7 +31,10 @@ export const Home = () => {
   const [hotels, setHotels] = useState([]);
   const { hotelCategory } = useSelector((state) => state.category);
   const { isSearchModalOpen } = useSelector((state) => state.date);
-  const { isAuthModalOpen } = useSelector((state) => state.auth);
+  const { isAuthModalOpen, isDropDownModalOpen } = useSelector(
+    (state) => state.auth
+  );
+  const { alert } = useAlert();
   const {
     isFilterModalOpen,
     priceRange,
@@ -40,6 +46,7 @@ export const Home = () => {
     isCancelable,
   } = useSelector((state) => state.filter);
 
+  console.log(isDropDownModalOpen);
   useEffect(() => {
     (async () => {
       try {
@@ -94,7 +101,7 @@ export const Home = () => {
 
   return (
     <div className="relative">
-      <Navbar />
+      <Navbar route="home" />
       <Categories />
       {hotels && hotels.length > 0 ? (
         <InfiniteScroll
@@ -116,9 +123,11 @@ export const Home = () => {
       ) : (
         <></>
       )}
+      {isDropDownModalOpen && <ProfileDropDown />}
       {isSearchModalOpen && <SearchStayWithDate />}
       {isFilterModalOpen && <Filter />}
       {isAuthModalOpen && <AuthModal />}
+      {alert.open && <Alert />}
     </div>
   );
 };

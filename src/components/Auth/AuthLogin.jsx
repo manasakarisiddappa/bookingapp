@@ -1,7 +1,7 @@
 import "./Auth.css";
 import { validateNumber, validatePassword } from "../../utils";
 
-import { loginHandler } from "../../services";
+import { LoginHandler } from "../../services";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CLEAR_USER_DATA,
@@ -11,6 +11,7 @@ import {
   SET_USER_NAME,
   SHOW_AUTH_MODAL,
 } from "../../Slices/auth-slice";
+import { useAlert } from "../../context/alert-context";
 
 let isNumberValid, isPasswordValid;
 
@@ -19,6 +20,7 @@ export const AuthLogin = () => {
     (state) => state.auth
   );
   const dispatch = useDispatch();
+  const { setAlert } = useAlert();
 
   const handleMobileChange = (event) => {
     isNumberValid = validateNumber(event.target.value);
@@ -42,7 +44,11 @@ export const AuthLogin = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     if (isPasswordValid && isNumberValid) {
-      const { accessToken, username } = await loginHandler(number, password);
+      const { accessToken, username } = await LoginHandler(
+        number,
+        password,
+        setAlert
+      );
       dispatch(SET_ACCESS_TOKEN(accessToken));
       dispatch(SET_USER_NAME(username));
     }
@@ -51,9 +57,10 @@ export const AuthLogin = () => {
   };
 
   const handleTestCredentialsClick = async () => {
-    const { accessToken, username } = await loginHandler(
+    const { accessToken, username } = await LoginHandler(
       9898989898,
-      "Abcd$1234"
+      "Abcd$1234",
+      setAlert
     );
     dispatch(SET_ACCESS_TOKEN(accessToken));
     dispatch(SET_USER_NAME(username));

@@ -7,6 +7,7 @@ import {
 } from "../../Slices/wishlist-slice";
 import { findHotelInWishlist } from "../../utils";
 import { SHOW_AUTH_MODAL } from "../../Slices/auth-slice";
+import { useAlert } from "../../context/alert-context";
 
 export const HotelCard = ({ hotel }) => {
   const { _id, name, image, address, state, rating, price } = hotel;
@@ -14,9 +15,7 @@ export const HotelCard = ({ hotel }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { accessToken } = useSelector((state) => state.auth);
   const IsHotelInWishlist = findHotelInWishlist(wishlist, _id);
-
-  console.log({ accessToken });
-  console.log({ wishlist });
+  const { setAlert } = useAlert();
 
   const navigate = useNavigate();
 
@@ -26,8 +25,21 @@ export const HotelCard = ({ hotel }) => {
 
   const handleWishlistClick = () => {
     if (accessToken) {
-      if (!IsHotelInWishlist) dispatch(ADD_TO_WISHLIST(hotel));
-      else dispatch(REMOVE_FROM_WISHLIST(_id));
+      if (!IsHotelInWishlist) {
+        dispatch(ADD_TO_WISHLIST(hotel));
+        setAlert({
+          open: true,
+          message: `Hotel:: ${name} added to wishlist`,
+          type: "success",
+        });
+      } else {
+        dispatch(REMOVE_FROM_WISHLIST(_id));
+        setAlert({
+          open: true,
+          message: `Hotel:: ${name} removed from wishlist`,
+          type: "success",
+        });
+      }
     } else {
       dispatch(SHOW_AUTH_MODAL());
     }

@@ -1,2 +1,2 @@
-export { signupHandler } from "./signup-service";
-export { loginHandler } from "./login-service";
+export { SignupHandler } from "./signup-service";
+export { LoginHandler } from "./login-service";

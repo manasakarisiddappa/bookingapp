@@ -71,14 +71,6 @@ export const Payment = () => {
       email: "manu@gmail.com",
       contact: "9898989898",
       description: "Thank you for booking with us",
-      checkout: {
-        method: {
-          netbanking: true,
-          card: true,
-          upi: true,
-          wallet: true,
-        },
-      },
 
       handler: ({ payment_id }) => {
         dispatch(

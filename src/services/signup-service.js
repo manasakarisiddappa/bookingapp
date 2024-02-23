@@ -1,7 +1,13 @@
 import axios from "axios";
 import { BASEURL } from "../url";
 
-export const signupHandler = async (username, number, email, password) => {
+export const SignupHandler = async (
+  username,
+  number,
+  email,
+  password,
+  setAlert
+) => {
   try {
     const data = await axios.post(BASEURL + "/api/auth/register", {
       username: username,
@@ -10,6 +16,12 @@ export const signupHandler = async (username, number, email, password) => {
       password: password,
     });
     console.log(data);
+
+    setAlert({
+      open: true,
+      message: `Account Created:: username - ${username}`,
+      type: "success",
+    });
   } catch (err) {
     console.log("error adding user to database");
   }

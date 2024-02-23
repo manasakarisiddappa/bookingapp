@@ -2,11 +2,15 @@ import React from "react";
 import "./Navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { TOGGLE_SEARCH_MODAL } from "../../Slices/date-slice";
-import { SHOW_AUTH_MODAL } from "../../Slices/auth-slice";
+import {
+  SHOW_AUTH_MODAL,
+  SHOW_DROP_DOWN_OPTIONS,
+} from "../../Slices/auth-slice";
 
 export const Navbar = () => {
   const { destination, checkInDate, checkOutDate, guests, isSearchModalOpen } =
     useSelector((state) => state.date);
+  const { accessToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleSearchClick = () => {
@@ -14,7 +18,12 @@ export const Navbar = () => {
   };
 
   const handleAuthClick = () => {
-    dispatch(SHOW_AUTH_MODAL());
+    if (accessToken) {
+      dispatch(SHOW_DROP_DOWN_OPTIONS());
+      console.log("inside nav bar");
+    } else {
+      dispatch(SHOW_AUTH_MODAL());
+    }
   };
 
   return (

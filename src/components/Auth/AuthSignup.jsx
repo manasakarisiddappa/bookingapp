@@ -1,5 +1,5 @@
 import "./Auth.css";
-import { signupHandler } from "../../services";
+import { SignupHandler } from "../../services";
 import {
   validateEmail,
   validateName,
@@ -15,6 +15,7 @@ import {
   NUMBER,
   PASSWORD,
 } from "../../Slices/auth-slice";
+import { useAlert } from "../../context/alert-context";
 
 let isNumberValid,
   isNameValid,
@@ -27,6 +28,7 @@ export const AuthSignup = () => {
     (state) => state.auth
   );
   const dispatch = useDispatch();
+  const { setAlert } = useAlert();
 
   console.log({ username, email, password, number, confirmPassword });
   console.log({
@@ -91,7 +93,7 @@ export const AuthSignup = () => {
       isPasswordValid &&
       isNumberValid
     ) {
-      signupHandler(username, number, email, password);
+      SignupHandler(username, number, email, password, setAlert);
     }
     dispatch(CLEAR_USER_DATA());
   };

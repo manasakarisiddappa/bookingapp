@@ -5,6 +5,7 @@ const authSlice = createSlice({
 
   initialState: {
     isAuthModalOpen: false,
+    isDropDownModalOpen: false,
     username: "",
     number: "",
     email: "",
@@ -53,6 +54,14 @@ const authSlice = createSlice({
       state.password = "";
       state.confirmPassword = "";
     },
+    SHOW_DROP_DOWN_OPTIONS: (state) => {
+      state.isDropDownModalOpen = !state.isDropDownModalOpen;
+      console.log(state.isDropDownModalOpen, "drop");
+    },
+    CLEAR_CREDENTIALS: (state) => {
+      state.accessToken = "";
+      state.name = "";
+    },
   },
 });
 
@@ -68,5 +77,7 @@ export const {
   CLEAR_USER_DATA,
   SET_ACCESS_TOKEN,
   SET_USER_NAME,
+  SHOW_DROP_DOWN_OPTIONS,
+  CLEAR_CREDENTIALS,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,13 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
-import { HotelCard, Navbar } from "../../components";
+import { Alert, HotelCard, Navbar } from "../../components";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { BASEURL } from "../../url";
+import { useAlert } from "../../context/alert-context";
 
 export const SearchResults = () => {
   const { destination } = useSelector((state) => state.date);
   const [hotels, SetHotels] = useState([]);
   const { hotelCategory } = useSelector((state) => state.category);
+  const { setAlert } = useAlert;
 
   useEffect(() => {
     (async () => {
@@ -41,6 +43,7 @@ export const SearchResults = () => {
           <h3>Nothing found</h3>
         )}
       </section>
+      {alert.open && <Alert />}
     </Fragment>
   );
 };
