@@ -69,7 +69,7 @@ export const Payment = () => {
       currency: "INR",
       name: "TravelO",
       email: "manu@gmail.com",
-      contact: "9606241670",
+      contact: "9898989898",
       description: "Thank you for booking with us",
       checkout: {
         method: {
