@@ -5,6 +5,7 @@
   z-index: 9;
   border-radius: 4px;
   padding-bottom: 2rem;
+  position: fixed;
 }
 
 .option-span.wishlist-span {

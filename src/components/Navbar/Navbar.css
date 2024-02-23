@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+.user {
+  color: black;
+}
+
 .heading-1 {
   font-size: 1.7rem;
   color: var(--primary-color);

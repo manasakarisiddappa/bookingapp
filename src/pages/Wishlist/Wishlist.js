@@ -16,10 +16,9 @@ export const Wishlist = () => {
     (state) => state.auth
   );
 
-  console.log({ wishlist, auth });
   return (
     <Fragment>
-      <Navbar />
+      <Navbar route="wishlist" />
       <h3 className="heading-2">Your wishlist</h3>
       <section className="wishlist-page d-flex align-center wrap gap-larger">
         {wishlist &&

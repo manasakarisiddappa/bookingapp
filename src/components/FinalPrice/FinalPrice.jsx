@@ -44,17 +44,20 @@ export const FinalPrice = ({ singleHotel }) => {
         </div>
         <div className="guests gutter-sm">
           <p>GUESTS</p>
-          {guests <= 0 ? (
-            <input
-              className="guest-count-input"
-              type="number"
-              placeholder="Add Guests"
-              value={guests}
-              onChange={handleGuestChange}
-            />
-          ) : (
-            <span>{guests} guests</span>
-          )}
+          {
+            (guests >= 0 || guests < 0) && (
+              <input
+                className="guest-count-input"
+                type="number"
+                placeholder="Add Guests"
+                value={guests}
+                onChange={handleGuestChange}
+              />
+            )
+            // : (
+            //   <span>{guests} guests</span>
+            // )
+          }
         </div>
       </div>
       <div>
