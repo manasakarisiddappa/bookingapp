@@ -15,7 +15,6 @@ export const SignupHandler = async (
       email: email,
       password: password,
     });
-    console.log(data);
 
     setAlert({
       open: true,
