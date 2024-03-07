@@ -16,9 +16,7 @@ import { useAlert } from "../../context/alert-context";
 let isNumberValid, isPasswordValid;
 
 export const AuthLogin = () => {
-  const { number, password, isAuthModalOpen } = useSelector(
-    (state) => state.auth
-  );
+  const { number, password } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { setAlert } = useAlert();
 
@@ -61,6 +59,7 @@ export const AuthLogin = () => {
       "Abcd$1234",
       setAlert
     );
+
     dispatch(SET_ACCESS_TOKEN(accessToken));
     dispatch(SET_USER_NAME(username));
     dispatch(CLEAR_USER_DATA());

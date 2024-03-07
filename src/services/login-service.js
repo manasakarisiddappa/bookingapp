@@ -9,6 +9,7 @@ export const LoginHandler = async (number, password, setAlert) => {
       number: number,
       password: password,
     });
+
     localStorage.setItem("token", accessToken);
     localStorage.setItem("username", username);
     setAlert({

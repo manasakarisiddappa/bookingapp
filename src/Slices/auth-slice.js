@@ -56,7 +56,6 @@ const authSlice = createSlice({
     },
     SHOW_DROP_DOWN_OPTIONS: (state) => {
       state.isDropDownModalOpen = !state.isDropDownModalOpen;
-      console.log(state.isDropDownModalOpen, "drop");
     },
     CLEAR_CREDENTIALS: (state) => {
       state.accessToken = "";
