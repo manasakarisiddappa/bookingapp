@@ -1,5 +1,5 @@
--Developed a full-stack web application for booking a hotel based on user preferences.  
--Developed Frontend using ReactJs, Redux and backend using NodeJs, ExpressJs for seamless user experience
+- Developed a full-stack web application for booking a hotel based on user preferences.  
+- Developed Frontend using ReactJs, Redux and backend using NodeJs, ExpressJs for seamless user experience
 and Mangodb is used for storing data. 
 - Implemented Features like User Authentication, Login and Signup forms, Search and Filter, Hotel
 Listings, Detailed Hotel Page, Order Summary page, Razorpay Payment Gateway Integration etc
